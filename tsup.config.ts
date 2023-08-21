@@ -5,7 +5,6 @@ import {
   copyWorkerPlugin,
 } from './config/plugins/esbuild/copyWorkerPlugin'
 import { resolveCoreImportsPlugin } from './config/plugins/esbuild/resolveCoreImportsPlugin'
-import { forceEsmExtensionsPlugin } from './config/plugins/esbuild/forceEsmExtensionsPlugin'
 
 // Externalize the in-house dependencies so that the user
 // would get the latest published version automatically.
@@ -29,7 +28,6 @@ const coreConfig: Options = {
   bundle: false,
   splitting: false,
   dts: true,
-  esbuildPlugins: [forceEsmExtensionsPlugin()],
 }
 
 const nodeConfig: Options = {
@@ -45,7 +43,7 @@ const nodeConfig: Options = {
   splitting: false,
   dts: true,
 
-  esbuildPlugins: [resolveCoreImportsPlugin(), forceEsmExtensionsPlugin()],
+  esbuildPlugins: [resolveCoreImportsPlugin()],
 }
 
 const browserConfig: Options = {
@@ -63,7 +61,6 @@ const browserConfig: Options = {
   },
   esbuildPlugins: [
     resolveCoreImportsPlugin(),
-    forceEsmExtensionsPlugin(),
     copyWorkerPlugin(SERVICE_WORKER_CHECKSUM),
   ],
 }
@@ -78,7 +75,7 @@ const reactNativeConfig: Options = {
   bundle: true,
   splitting: false,
   dts: true,
-  esbuildPlugins: [resolveCoreImportsPlugin(), forceEsmExtensionsPlugin()],
+  esbuildPlugins: [resolveCoreImportsPlugin()],
 }
 
 const iifeConfig: Options = {
